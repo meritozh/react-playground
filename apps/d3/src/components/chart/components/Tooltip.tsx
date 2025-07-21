@@ -8,8 +8,16 @@ export interface TooltipProps {
 
 export const Tooltip: React.FC<TooltipProps> = ({ x, y, content }) => {
   return (
-    <div style={{ position: 'absolute', top: y, left: x, pointerEvents: 'none' }}>
-      {content}
-    </div>
+    <foreignObject x={x} y={y} width="100" height="50">
+      <div style={{ 
+        backgroundColor: 'white', 
+        border: '1px solid black', 
+        padding: '5px',
+        borderRadius: '3px',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+      }}>
+        {content}
+      </div>
+    </foreignObject>
   );
 };

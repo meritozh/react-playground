@@ -5,7 +5,7 @@ export type AxisScale = d3.ScaleLinear<number, number> | d3.ScaleTime<number, nu
 
 export interface AxisProps {
   scale: AxisScale;
-  orientation: 'bottom' | 'left';
+  orientation: 'bottom' | 'left' | 'top' | 'right';
   transform?: string;
 }
 
@@ -14,7 +14,11 @@ export const Axis: React.FC<AxisProps> = ({ scale, orientation, transform }) => 
 
   useEffect(() => {
     if (ref.current) {
-      const axisGenerator = orientation === 'bottom' ? d3.axisBottom : d3.axisLeft;
+      const axisGenerator = 
+        orientation === 'bottom' ? d3.axisBottom :
+        orientation === 'left' ? d3.axisLeft :
+        orientation === 'top' ? d3.axisTop :
+        d3.axisRight;
       const axis = axisGenerator(scale as d3.AxisScale<d3.AxisDomain>);
       d3.select(ref.current).call(axis);
     }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Glyph } from '../components/Glyph';
 
 export interface GlyphSeriesProps<T> {
   data: T[];

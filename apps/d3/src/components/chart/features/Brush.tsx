@@ -15,7 +15,16 @@ export const Brush: React.FC<BrushProps> = ({ width, height, onBrush }) => {
       const brush = d3.brushX().extent([[0, 0], [width, height]]).on('end', (event) => {
         onBrush(event.selection as [number, number] | null);
       });
-      d3.select(ref.current).call(brush);
+      const g = d3.select(ref.current);
+      g.call(brush);
+
+      // Style the brush overlay to make it visible
+      g.select('.overlay')
+        .style('fill', 'rgba(0, 0, 0, 0.1)');
+
+      // Style the brush selection
+      g.select('.selection')
+        .style('fill', 'rgba(0, 0, 255, 0.3)');
     }
   }, [width, height, onBrush]);
 
